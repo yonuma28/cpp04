@@ -1,5 +1,8 @@
 # include "Animal.hpp"
 # include "Dog.hpp"
+# include "Cat.hpp"
+# include "WrongAnimal.hpp"
+# include "WrongCat.hpp"
 
 int main()
 {
@@ -13,6 +16,15 @@ int main()
     i->makeSound();
     j->makeSound();
     meta->makeSound();
+
+	std::cout << "------Wrong ver. (without virtual)------" << std::endl;
+
+	const WrongAnimal* meta2 = new WrongAnimal();
+	const WrongAnimal* i2 = new WrongCat();
+
+	std::cout << i2->getType() << " " << std::endl;
+	i2->makeSound();
+	meta2->makeSound();
 
     return 0;
 }

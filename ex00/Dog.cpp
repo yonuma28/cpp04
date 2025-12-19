@@ -11,10 +11,10 @@ Dog::~Dog()
 	std::cout << "Dog destructor called !!" << std::endl;
 }
 
-Dog::Dog(const Dog& copy)
+Dog::Dog(const Dog& copy) : Animal(copy)
 {
-	*this = copy;
-	std::cout << "Dog copy constructor called !!" << std::endl;
+    std::cout << "Dog copy constructor called !!" << std::endl;
+    *this = copy;
 }
 
 Dog& Dog::operator=(const Dog& copy)

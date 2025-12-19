@@ -1,7 +1,7 @@
 NAME = ScavTrap
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic-errors
-SRC = main.cpp Animal.cpp Dog.cpp
+SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
 
 all: $(NAME)
 
