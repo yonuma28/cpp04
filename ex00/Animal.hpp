@@ -28,6 +28,7 @@ class Animal
          * @brief 動物の鳴き声を出力
         */
         virtual void makeSound() const;
+		// void	makeSound() const;
 };
 
-# endif
+# endif //ANIMAL_H

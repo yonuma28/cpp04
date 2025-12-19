@@ -1,4 +1,5 @@
-# ifndef DOG_H
+#ifndef DOG_H
+# define DOG_H
 
 # include "Animal.hpp"
 
@@ -8,12 +9,12 @@ class Dog : public Animal
         Dog();
         Dog(const Dog& copy);
         Dog& operator=(const Dog& other);
-        ~Dog();
+        virtual ~Dog();
 
         /*
          * @brief 犬固有の鳴き声
         */
         void    makeSound() const;
-}
+};
 
-# endif
+# endif //DOG_H

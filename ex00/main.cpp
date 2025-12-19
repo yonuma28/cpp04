@@ -1,4 +1,5 @@
 # include "Animal.hpp"
+# include "Dog.hpp"
 
 int main()
 {
@@ -9,7 +10,7 @@ int main()
     std::cout << j->getType() << " " << std::endl;
     std::cout << i->getType() << " " << std::endl;
 
-    i->makeSound(); // will output the cat sound! [cite: 148]
+    i->makeSound();
     j->makeSound();
     meta->makeSound();
 
