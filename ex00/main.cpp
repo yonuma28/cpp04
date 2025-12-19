@@ -26,5 +26,12 @@ int main()
 	i2->makeSound();
 	meta2->makeSound();
 
+	std::cout << "-----DESTRUCTOR CALLED !!!!-----" << std::endl;
+	delete meta;
+	delete i;
+	delete j;
+	delete meta2;
+	delete i2;
+
     return 0;
 }

@@ -2,7 +2,7 @@
 
 WrongAnimal::WrongAnimal() : type("WrongAnimal")
 {
-	std::cout << "WrongAnimal constructor called !!" << std::cout;
+	std::cout << "WrongAnimal constructor called !!" << std::endl;
 }
 
 WrongAnimal::~WrongAnimal()
