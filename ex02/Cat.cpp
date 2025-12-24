@@ -2,7 +2,7 @@
 
 # include <iostream>
 
-Cat::Cat() : Animal()
+Cat::Cat() : AAnimal()
 {
 	std::cout << "Cat constructor called !!!" << std::endl;
 	this->type = "Cat";
@@ -15,7 +15,7 @@ Cat::~Cat()
 	std::cout << "Cat destructor called !!!" << std::endl;
 }
 
-Cat::Cat(const Cat& copy) : Animal(copy)
+Cat::Cat(const Cat& copy) : AAnimal(copy)
 {
 	std::cout << "Cat copy constructor called !!!" << std::endl;
 	this->brain = new Brain(*copy.brain);
@@ -37,21 +37,4 @@ Cat& Cat::operator=(const Cat& other)
 
 void Cat::makeSound() const {
 	std::cout << "Meow Meow!" << std::endl;
-}
-
-const Brain* Cat::getBrain() const {
-	return this->brain;
-}
-
-void Cat::setBrainIdea(int idx, std::string idea)
-{
-    if (this->brain)
-        this->brain->setIdea(idx, idea);
-}
-
-std::string Cat::getBrainIdea(int idx) const
-{
-    if (this->brain)
-        return this->brain->getIdea(idx);
-    return "";
 }

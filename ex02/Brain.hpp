@@ -13,9 +13,6 @@ class Brain
 		virtual ~Brain();
 		Brain(const Brain& copy);
 		Brain& operator=(const Brain& copy);
-
-		void setIdea(int idx, std::string idea);
-        std::string getIdea(int idx) const;
 };
 
 #endif //BRAIN_H

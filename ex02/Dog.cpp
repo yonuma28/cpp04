@@ -2,7 +2,7 @@
 
 # include <iostream>
 
-Dog::Dog() : Animal()
+Dog::Dog() : AAnimal()
 {
 	std::cout << "Dog constructor called !!!" << std::endl;
 	this->type = "Dog";
@@ -15,13 +15,10 @@ Dog::~Dog()
 	std::cout << "Dog destructor called !!!" << std::endl;
 }
 
-Dog::Dog(const Dog& copy) : Animal(copy)
+Dog::Dog(const Dog& copy) : AAnimal(copy)
 {
 	std::cout << "Dog copy constructor called !!!" << std::endl;
-	if (copy.brain)
-		this->brain = new Brain(*copy.brain);
-	else
-		this->brain = NULL;
+	this->brain = new Brain(*copy.brain);
 }
 
 Dog& Dog::operator=(const Dog& other)
@@ -40,21 +37,4 @@ Dog& Dog::operator=(const Dog& other)
 
 void Dog::makeSound() const {
     std::cout << "Woof Woof!" << std::endl;
-}
-
-const Brain* Dog::getBrain() const {
-	return this->brain;
-}
-
-void Dog::setBrainIdea(int idx, std::string idea)
-{
-    if (this->brain)
-        this->brain->setIdea(idx, idea);
-}
-
-std::string Dog::getBrainIdea(int idx) const
-{
-    if (this->brain)
-        return this->brain->getIdea(idx);
-    return "";
 }

@@ -19,6 +19,14 @@ class Cat : public Animal
          * @brief 猫固有の鳴き声
         */
         void    makeSound() const;
+
+        /*
+         * @brief Brain のポインタを返す
+        */
+        const Brain*    getBrain() const;
+
+        void setBrainIdea(int idx, std::string idea);
+        std::string getBrainIdea(int idx) const;
 };
 
 # endif //CAT_H
