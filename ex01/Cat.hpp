@@ -19,6 +19,9 @@ class Cat : public Animal
          * @brief 猫固有の鳴き声
         */
         void    makeSound() const;
+
+		void setIdea(int index, const std::string& idea);
+		std::string getIdea(int index) const;
 };
 
 # endif //CAT_H

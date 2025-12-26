@@ -38,3 +38,13 @@ Dog& Dog::operator=(const Dog& other)
 void Dog::makeSound() const {
     std::cout << "Woof Woof!" << std::endl;
 }
+
+void Dog::setIdea(int index, const std::string& idea)
+{
+	this->brain->setIdea(index, idea);
+}
+
+std::string Dog::getIdea(int index) const
+{
+	return this->brain->getIdea(index);
+}

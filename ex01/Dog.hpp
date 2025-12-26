@@ -19,6 +19,9 @@ class Dog : public Animal
          * @brief 犬固有の鳴き声
         */
         void    makeSound() const;
+
+		void setIdea(int index, const std::string& idea);
+		std::string getIdea(int index) const;
 };
 
 # endif //DOG_H
