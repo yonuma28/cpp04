@@ -43,5 +43,22 @@ int main()
     Dog b;
     a = b;
 
+    if (original->getBrainIdea(0) != copy->getBrainIdea(0)) {
+        std::cout << ">>> SUCCESS: Original and Copy are independent!" << std::endl;
+    } else {
+        std::cout << ">>> ERROR: Original was affected by Copy's change!" << std::endl;
+    }
+
+    std::cout << "\n[5] Assignment Operator Test (with self-assignment)..." << std::endl;
+    Dog assignment_test;
+    assignment_test = *copy;
+    assignment_test = assignment_test;
+    std::cout << "Self-assignment completed safely." << std::endl;
+
+    std::cout << "\n[6] Final Destruction (Check for double free or leaks)..." << std::endl;
+    delete original;
+    delete copy;
+
+    std::cout << "\n===== Test Finished =====" << std::endl;
     return 0;
 }
