@@ -22,4 +22,10 @@ linter:
 
 re: fclean all
 
-.PHONY: all clean re fclean format
+run: all
+	./$(NAME)
+
+run_quiet: all
+	./$(NAME) | grep -v -E 'constructor|destructor|copy'
+
+.PHONY: all clean re fclean format run run_quiet
