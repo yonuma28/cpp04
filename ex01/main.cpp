@@ -2,10 +2,11 @@
 #include "Cat.hpp"
 #include "Animal.hpp"
 #include "Brain.hpp"
+#include <iostream>
 
 int main()
 {
-    std::cout << "=== 配列テスト開始 ===" << std::endl;
+    std::cout << "=== [1] 多態性（ポリモーフィズム）による配列テスト ===" << std::endl;
     const int num_animals = 4;
     Animal* animals[num_animals];
 
@@ -16,49 +17,47 @@ int main()
             animals[i] = new Cat();
     }
 
-    std::cout << "=== 破棄 ===" << std::endl;
     for (int i = 0; i < num_animals; i++) {
         delete animals[i];
     }
 
-    std::cout << "\n=== Deep Copy テスト開始 ===" << std::endl;
-    Dog basic;
-    basic.setIdea(0, "DOG_BASIC_IDEA");
-    {
-        Dog tmp = basic;
-        tmp.setIdea(0, "DOG_TMP_IDEA");
-        std::cout << "Dog basic[0]=\"" << basic.getIdea(0) << "\" tmp[0]=\"" << tmp.getIdea(0) << "\"" << std::endl;
-    }
+    std::cout << "\n=== [2] 深いコピー（Deep Copy）のテスト: コピーコンストラクタ ===" << std::endl;
+    Dog* original = new Dog();
+    original->setIdea(0, "オリジナルのアイデア");
 
-    basic.makeSound();
+    Dog* copy = new Dog(*original);
+    
+    std::cout << "Original[0]: " << original->getIdea(0) << std::endl;
+    std::cout << "Copy[0]:     " << copy->getIdea(0) << std::endl;
 
-	Cat c1;
-	c1.setIdea(0, "CAT_C1_IDEA");
-	Cat c2(c1);
-	c2.setIdea(0, "CAT_C2_IDEA");
-    std::cout << "Cat c1[0]=\"" << c1.getIdea(0) << "\" c2[0]=\"" << c2.getIdea(0) << "\"" << std::endl;
-
-    std::cout << "\n=== 代入演算子テスト開始 ===" << std::endl;
-    Dog a;
-    Dog b;
-    a = b;
-
-    if (original->getBrainIdea(0) != copy->getBrainIdea(0)) {
-        std::cout << ">>> SUCCESS: Original and Copy are independent!" << std::endl;
+    copy->setIdea(0, "書き換えられたコピーのアイデア");
+    std::cout << "\n--- コピーの値を変更した後の確認 ---" << std::endl;
+    if (original->getIdea(0) != copy->getIdea(0)) {
+        std::cout << ">>> 成功: オブジェクトは独立しています (Deep Copy)!" << std::endl;
     } else {
-        std::cout << ">>> ERROR: Original was affected by Copy's change!" << std::endl;
+        std::cout << ">>> 失敗: オリジナルの値が書き換わっています (Shallow Copy)!" << std::endl;
     }
 
-    std::cout << "\n[5] Assignment Operator Test (with self-assignment)..." << std::endl;
-    Dog assignment_test;
-    assignment_test = *copy;
-    assignment_test = assignment_test;
-    std::cout << "Self-assignment completed safely." << std::endl;
+    std::cout << "\n=== [3] 代入演算子および自己代入のテスト ===" << std::endl;
+    Dog assign_test_a;
+    assign_test_a.setIdea(0, "アイデア A");
+    
+    {
+        Dog assign_test_b;
+        assign_test_b = assign_test_a;
+        assign_test_b.setIdea(0, "修正されたアイデア B");
+    }
+    std::cout << "assign_test_a[0] の生存確認: " << assign_test_a.getIdea(0) << std::endl;
 
-    std::cout << "\n[6] Final Destruction (Check for double free or leaks)..." << std::endl;
+    std::cout << "\n--- 自己代入のチェック ---" << std::endl;
+    Dog *ptr_to_a = &assign_test_a;
+    assign_test_a = *ptr_to_a;
+    std::cout << "自己代入が安全に完了しました。" << std::endl;
+
+    std::cout << "\n=== [4] 最終クリーンアップ ===" << std::endl;
     delete original;
     delete copy;
 
-    std::cout << "\n===== Test Finished =====" << std::endl;
+    std::cout << "\n===== テスト終了 =====" << std::endl;
     return 0;
 }

@@ -14,7 +14,7 @@ class Dog : public Animal
         /*
          * @brief 犬固有の鳴き声
         */
-        void    makeSound() const;
+        virtual void    makeSound() const;
 };
 
 # endif //DOG_H
