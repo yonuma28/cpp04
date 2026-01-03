@@ -17,6 +17,10 @@ int main()
             animals[i] = new Cat();
     }
 
+    for (int i = 0; i < num_animals; i++)
+        animals[i]->makeSound();
+
+    std::cout << "\n=== デストラクタの確認 ===" << std::endl;
     for (int i = 0; i < num_animals; i++) {
         delete animals[i];
     }
@@ -37,7 +41,11 @@ int main()
     } else {
         std::cout << ">>> 失敗: オリジナルの値が書き換わっています (Shallow Copy)!" << std::endl;
     }
+    std::cout << "中身のチェック" << std::endl;
+    std::cout << "Original[0]: " << original->getIdea(0) << std::endl;
+    std::cout << "Copy[0]:     " << copy->getIdea(0) << std::endl;
 
+    std::cout << std::endl;
     std::cout << "\n=== [3] 代入演算子および自己代入のテスト ===" << std::endl;
     Dog assign_test_a;
     assign_test_a.setIdea(0, "アイデア A");

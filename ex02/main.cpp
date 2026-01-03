@@ -2,47 +2,60 @@
 #include "Cat.hpp"
 #include "AAnimal.hpp"
 #include "Brain.hpp"
+#include <iostream>
+
+// 色を付けるためのマクロ（任意ですが、42の評価では非常に見やすくなります）
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define YELLOW "\033[33m"
+#define RESET "\033[0m"
 
 int main()
 {
-    std::cout << "=== 抽象クラステスト ===" << std::endl;
-    // AAnimal a; // これはコンパイルできない（= インスタンス化不可）
-
+    std::cout << YELLOW << "=== 1. 抽象クラス & 多態性テスト ===" << RESET << std::endl;
     const AAnimal* j = new Dog();
     const AAnimal* i = new Cat();
 
-    std::cout << j->getType() << std::endl;
-    std::cout << i->getType() << std::endl;
+    std::cout << "Type: " << j->getType() << " " << std::endl;
+    std::cout << "Type: " << i->getType() << " " << std::endl;
     j->makeSound();
     i->makeSound();
 
     delete j;
     delete i;
 
-    std::cout << "=== 配列 delete テスト ===" << std::endl;
+    std::cout << std::endl << YELLOW << "=== 2. 配列の構築と一括削除 (ex01要件) ===" << RESET << std::endl;
     const int num_animals = 4;
     AAnimal* animals[num_animals];
 
-    for (int idx = 0; idx < num_animals; idx++)
-    {
-        if (idx % 2 == 0)
-            animals[idx] = new Dog();
+    for (int k = 0; k < num_animals; k++) {
+        std::cout << "\n[Create " << k << "]" << std::endl;
+        if (k < num_animals / 2)
+            animals[k] = new Dog();
         else
-            animals[idx] = new Cat();
+            animals[k] = new Cat();
     }
-    for (int idx = 0; idx < num_animals; idx++)
-        delete animals[idx];
 
-    std::cout << "=== Copy/Assign テスト ===" << std::endl;
-    Dog d1;
-    Dog d2(d1);
-    Dog d3;
-    d3 = d2;
+    std::cout << GREEN << "--- 鳴き声チェック ---" << RESET << std::endl;
+    for (int k = 0; k < num_animals; k++)
+        animals[k]->makeSound();
 
-    Cat c1;
-    Cat c2(c1);
-    Cat c3;
-    c3 = c2;
+    std::cout << GREEN << "--- 一括削除チェック ---" << RESET << std::endl;
+    for (int k = 0; k < num_animals; k++) {
+        std::cout << "\n[Delete " << k << "]" << std::endl;
+        delete animals[k];
+    }
+
+    std::cout << std::endl << YELLOW << "=== 3. 深いコピーの厳密なテスト (ex01最重要) ===" << RESET << std::endl;
+    {
+        std::cout << GREEN << "--- Dogのコピーテスト ---" << RESET << std::endl;
+        Dog basic;
+        {
+            Dog tmp = basic;
+        }
+        std::cout << "\nコピー先の消滅後も、コピー元が健在かチェック" << std::endl;
+        basic.makeSound(); 
+    }
 
     return 0;
 }
